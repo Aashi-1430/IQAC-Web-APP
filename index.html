@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SVIET IQAC | Login</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+</head>
+
+<body>
+
+<div id="app">
+
+    <!-- ============================= -->
+    <!-- AUTHENTICATION PAGE -->
+    <!-- ============================= -->
+
+    <div id="authPage" class="auth-page">
+
+        <!-- LEFT SIDE -->
+        <section class="auth-left">
+
+            <div class="brand">
+
+                <div class="brand-logo">
+                    S
+                </div>
+
+                <div>
+                    <h2>SVIET</h2>
+                    <span>Swami Vivekanand Institute</span>
+                </div>
+
+            </div>
+
+            <div class="hero-content">
+
+                <div class="iqac-badge">
+                    IQAC
+                </div>
+
+                <h1>
+                    Internal Quality<br>
+                    Assurance Cell
+                </h1>
+
+                <p>
+                    Quality. Excellence. Continuous Improvement.
+                </p>
+
+                <div class="hero-line"></div>
+
+                <p class="college-name">
+                    Swami Vivekanand Institute of Engineering & Technology
+                </p>
+
+            </div>
+
+            <div class="left-footer">
+                © 2026 SVIET IQAC
+            </div>
+
+        </section>
+
+
+        <!-- RIGHT SIDE -->
+        <section class="auth-right">
+
+            <div class="auth-container">
+
+                <!-- MOBILE LOGO -->
+                <div class="mobile-brand">
+                    <div class="brand-logo">S</div>
+                    <div>
+                        <h2>SVIET</h2>
+                        <span>IQAC Portal</span>
+                    </div>
+                </div>
+
+
+                <!-- AUTH CARD -->
+                <div class="auth-card">
+
+                    <!-- TABS -->
+
+                    <div class="auth-tabs">
+
+                        <button
+                            id="loginTab"
+                            class="auth-tab active"
+                            onclick="showLogin()"
+                        >
+                            Login
+                        </button>
+
+                        <button
+                            id="signupTab"
+                            class="auth-tab"
+                            onclick="showSignup()"
+                        >
+                            Sign Up
+                        </button>
+
+                    </div>
+
+
+                    <!-- ================= -->
+                    <!-- LOGIN FORM -->
+                    <!-- ================= -->
+
+                    <div id="loginSection">
+
+                        <div class="form-heading">
+
+                            <h1>Welcome Back</h1>
+
+                            <p>
+                                Login to access the IQAC Portal
+                            </p>
+
+                        </div>
+
+
+                        <form id="loginForm">
+
+                            <div class="input-group">
+
+                                <label for="loginEmail">
+                                    Email Address
+                                </label>
+
+                                <div class="input-wrapper">
+
+                                    <span class="input-icon">
+                                        ✉
+                                    </span>
+
+                                    <input
+                                        type="email"
+                                        id="loginEmail"
+                                        placeholder="Enter your email"
+                                        required
+                                        autocomplete="email"
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="input-group">
+
+                                <label for="loginPassword">
+                                    Password
+                                </label>
+
+                                <div class="input-wrapper">
+
+                                    <span class="input-icon">
+                                        🔒
+                                    </span>
+
+                                    <input
+                                        type="password"
+                                        id="loginPassword"
+                                        placeholder="Enter your password"
+                                        required
+                                        autocomplete="current-password"
+                                    >
+
+                                    <button
+                                        type="button"
+                                        class="password-toggle"
+                                        onclick="togglePassword('loginPassword', this)"
+                                    >
+                                        Show
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+
+                            <button
+                                type="submit"
+                                class="primary-button"
+                                id="loginButton"
+                            >
+                                <span>Login</span>
+                                <span class="button-arrow">→</span>
+                            </button>
+
+                        </form>
+
+
+                        <div
+                            id="loginMessage"
+                            class="message hidden"
+                        ></div>
+
+
+                        <div class="auth-switch">
+
+                            Don't have an account?
+
+                            <button
+                                onclick="showSignup()"
+                            >
+                                Create Account
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ================= -->
+                    <!-- SIGNUP FORM -->
+                    <!-- ================= -->
+
+                    <div
+                        id="signupSection"
+                        class="hidden"
+                    >
+
+                        <div class="form-heading">
+
+                            <h1>Create Account</h1>
+
+                            <p>
+                                Register for the SVIET IQAC Portal
+                            </p>
+
+                        </div>
+
+
+                        <form id="signupForm">
+
+                            <div class="input-group">
+
+                                <label for="signupName">
+                                    Full Name
+                                </label>
+
+                                <div class="input-wrapper">
+
+                                    <span class="input-icon">
+                                        👤
+                                    </span>
+
+                                    <input
+                                        type="text"
+                                        id="signupName"
+                                        placeholder="Enter your full name"
+                                        required
+                                        autocomplete="name"
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="input-group">
+
+                                <label for="signupEmail">
+                                    Email Address
+                                </label>
+
+                                <div class="input-wrapper">
+
+                                    <span class="input-icon">
+                                        ✉
+                                    </span>
+
+                                    <input
+                                        type="email"
+                                        id="signupEmail"
+                                        placeholder="Enter your email"
+                                        required
+                                        autocomplete="email"
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="input-group">
+
+                                <label for="signupPassword">
+                                    Password
+                                </label>
+
+                                <div class="input-wrapper">
+
+                                    <span class="input-icon">
+                                        🔒
+                                    </span>
+
+                                    <input
+                                        type="password"
+                                        id="signupPassword"
+                                        placeholder="Create a password"
+                                        required
+                                        minlength="6"
+                                        autocomplete="new-password"
+                                    >
+
+                                    <button
+                                        type="button"
+                                        class="password-toggle"
+                                        onclick="togglePassword('signupPassword', this)"
+                                    >
+                                        Show
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="input-group">
+
+                                <label for="confirmPassword">
+                                    Confirm Password
+                                </label>
+
+                                <div class="input-wrapper">
+
+                                    <span class="input-icon">
+                                        🔒
+                                    </span>
+
+                                    <input
+                                        type="password"
+                                        id="confirmPassword"
+                                        placeholder="Confirm your password"
+                                        required
+                                        autocomplete="new-password"
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="approval-info">
+
+                                <span class="approval-icon">
+                                    ⓘ
+                                </span>
+
+                                <p>
+                                    New accounts require approval from
+                                    the IQAC Coordinator before login.
+                                </p>
+
+                            </div>
+
+
+                            <button
+                                type="submit"
+                                class="primary-button"
+                                id="signupButton"
+                            >
+                                <span>Create Account</span>
+                                <span class="button-arrow">→</span>
+                            </button>
+
+                        </form>
+
+
+                        <div
+                            id="signupMessage"
+                            class="message hidden"
+                        ></div>
+
+
+                        <div class="auth-switch">
+
+                            Already have an account?
+
+                            <button
+                                onclick="showLogin()"
+                            >
+                                Login
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="security-note">
+
+                    <span>🔐</span>
+
+                    <span>
+                        Secure authentication powered by JWT
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- ============================= -->
+    <!-- IQAC DASHBOARD -->
+    <!-- ============================= -->
+
+    <div
+        id="iqacDashboard"
+        class="dashboard-page hidden"
+    >
+
+        <header class="dashboard-header">
+
+            <div class="dashboard-brand">
+
+                <div class="small-logo">
+                    S
+                </div>
+
+                <div>
+                    <h2>SVIET IQAC</h2>
+                    <span>Internal Quality Assurance Cell</span>
+                </div>
+
+            </div>
+
+
+            <div class="user-area">
+
+                <div class="user-info">
+
+                    <strong id="iqacUserName">
+                        IQAC Coordinator
+                    </strong>
+
+                    <span>
+                        IQAC Coordinator
+                    </span>
+
+                </div>
+
+                <div class="user-avatar" id="iqacAvatar">
+                    A
+                </div>
+
+                <button
+                    class="logout-button"
+                    onclick="logout()"
+                >
+                    Logout
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <main class="dashboard-content">
+
+            <div class="dashboard-title">
+
+                <div>
+
+                    <span class="dashboard-label">
+                        ADMINISTRATOR
+                    </span>
+
+                    <h1>
+                        IQAC Coordinator Dashboard
+                    </h1>
+
+                    <p>
+                        Welcome to the SVIET Internal Quality Assurance Cell.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="empty-dashboard">
+
+                <div class="empty-icon">
+                    IQAC
+                </div>
+
+                <h2>
+                    Dashboard Ready
+                </h2>
+
+                <p>
+                    IQAC management modules will appear here.
+                </p>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <!-- ============================= -->
+    <!-- HOD DASHBOARD -->
+    <!-- ============================= -->
+
+    <div
+        id="hodDashboard"
+        class="dashboard-page hidden"
+    >
+
+        <header class="dashboard-header">
+
+            <div class="dashboard-brand">
+
+                <div class="small-logo">
+                    S
+                </div>
+
+                <div>
+                    <h2>SVIET IQAC</h2>
+                    <span>Internal Quality Assurance Cell</span>
+                </div>
+
+            </div>
+
+
+            <div class="user-area">
+
+                <div class="user-info">
+
+                    <strong id="hodUserName">
+                        HOD
+                    </strong>
+
+                    <span>
+                        Head of Department
+                    </span>
+
+                </div>
+
+                <div class="user-avatar" id="hodAvatar">
+                    H
+                </div>
+
+                <button
+                    class="logout-button"
+                    onclick="logout()"
+                >
+                    Logout
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <main class="dashboard-content">
+
+            <div class="dashboard-title">
+
+                <div>
+
+                    <span class="dashboard-label">
+                        USER
+                    </span>
+
+                    <h1>
+                        HOD Dashboard
+                    </h1>
+
+                    <p>
+                        Welcome to the SVIET IQAC Portal.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="empty-dashboard">
+
+                <div class="empty-icon">
+                    HOD
+                </div>
+
+                <h2>
+                    Dashboard Ready
+                </h2>
+
+                <p>
+                    Departmental IQAC modules will appear here.
+                </p>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
