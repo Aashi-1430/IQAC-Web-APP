@@ -1715,7 +1715,7 @@ async function showIQACDashboard(
      */
 
     setApplicationPath(
-        "/iqac-coordinator/dashboard"
+        "/iqac-coordinator/home"
     );
 
 }
@@ -1818,7 +1818,7 @@ async function showHODDashboard(
      */
 
     setApplicationPath(
-        "/hod/dashboard"
+        "/hod/home"
     );
 
 }
@@ -1873,6 +1873,263 @@ function setApplicationPath(
         );
 
     }
+
+}
+
+
+/* =========================================================
+   PROFILE & PASSWORD
+   ========================================================= */
+
+function showProfile() {
+
+    const user =
+        JSON.parse(
+            localStorage.getItem(
+                "iqac_user"
+            )
+        ) || {};
+
+    alert(
+        `Name: ${user.name || "IQAC Coordinator"}\n` +
+        `Email: ${user.email || "N/A"}\n` +
+        `Role: ${user.role || "IQAC Coordinator"}`
+    );
+
+}
+
+
+const CHANGE_PASSWORD_API =
+    `${API_BASE_URL}/auth/change-password`;
+
+const changePasswordOverlay =
+    document.getElementById("changePasswordOverlay");
+
+const changePasswordForm =
+    document.getElementById("changePasswordForm");
+
+const changePasswordMessage =
+    document.getElementById("changePasswordMessage");
+
+const changePasswordSubmit =
+    document.getElementById("changePasswordSubmit");
+
+
+/*
+ * Opens the Change Password modal.
+ * Triggered by the "Change Password" dropdown item.
+ */
+
+function changePassword() {
+
+    if (!changePasswordOverlay) {
+        return;
+    }
+
+    if (changePasswordForm) {
+        changePasswordForm.reset();
+    }
+
+    if (changePasswordMessage) {
+        changePasswordMessage.textContent = "";
+        changePasswordMessage.className = "message hidden";
+    }
+
+    changePasswordOverlay.classList.remove("hidden");
+
+    const firstInput =
+        document.getElementById("currentPasswordInput");
+
+    if (firstInput) {
+        firstInput.focus();
+    }
+
+}
+
+
+function closeChangePasswordModal() {
+
+    if (!changePasswordOverlay) {
+        return;
+    }
+
+    changePasswordOverlay.classList.add("hidden");
+
+}
+
+
+document.addEventListener("keydown", (event) => {
+
+    if (
+        event.key === "Escape" &&
+        changePasswordOverlay &&
+        !changePasswordOverlay.classList.contains("hidden")
+    ) {
+        closeChangePasswordModal();
+    }
+
+});
+
+
+if (changePasswordForm) {
+
+    changePasswordForm.addEventListener(
+        "submit",
+        async (event) => {
+
+            event.preventDefault();
+
+
+            const currentPassword =
+                document.getElementById("currentPasswordInput").value;
+
+            const newPassword =
+                document.getElementById("newPasswordInput").value;
+
+            const confirmNewPassword =
+                document.getElementById("confirmNewPasswordInput").value;
+
+
+            /* ---------------------------------------------
+               VALIDATION
+            --------------------------------------------- */
+
+            if (!currentPassword) {
+
+                showMessage(
+                    changePasswordMessage,
+                    "Please enter your current password.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+            if (!newPassword || newPassword.length < 6) {
+
+                showMessage(
+                    changePasswordMessage,
+                    "New password must be at least 6 characters.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+            if (newPassword !== confirmNewPassword) {
+
+                showMessage(
+                    changePasswordMessage,
+                    "New passwords do not match.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+            const token =
+                localStorage.getItem("iqac_token");
+
+            if (!token) {
+
+                showMessage(
+                    changePasswordMessage,
+                    "No authentication token found. Please log in again.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            setButtonLoading(
+                changePasswordSubmit,
+                true,
+                "Updating..."
+            );
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        CHANGE_PASSWORD_API,
+                        {
+                            method: "POST",
+
+                            credentials: "include",
+
+                            headers: {
+                                "accept": "application/json",
+                                "Content-Type": "application/json",
+                                "Authorization": `Bearer ${token}`
+                            },
+
+                            body: JSON.stringify({
+                                current_password: currentPassword,
+                                new_password: newPassword
+                            })
+                        }
+                    );
+
+                const data =
+                    await parseResponse(response);
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        extractErrorMessage(data)
+                    );
+
+                }
+
+                showMessage(
+                    changePasswordMessage,
+                    "Password changed successfully!",
+                    "success"
+                );
+
+                changePasswordForm.reset();
+
+                setTimeout(
+                    closeChangePasswordModal,
+                    1500
+                );
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "CHANGE PASSWORD ERROR:",
+                    error
+                );
+
+                showMessage(
+                    changePasswordMessage,
+                    error.message ||
+                    "Unable to change password. Please try again.",
+                    "error"
+                );
+
+            }
+
+            finally {
+
+                setButtonLoading(
+                    changePasswordSubmit,
+                    false,
+                    "Update Password"
+                );
+
+            }
+
+        }
+    );
 
 }
 

@@ -573,6 +573,139 @@ button {
 
 
 /* =========================================
+   SECONDARY BUTTON
+========================================= */
+
+.secondary-button {
+    height: 46px;
+
+    padding: 0 20px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 9px;
+
+    background: white;
+
+    color: #374151;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    transition: 0.2s;
+}
+
+.secondary-button:hover {
+    background: #f5f7fa;
+
+    border-color: #c7ccd4;
+}
+
+
+/* =========================================
+   MODAL
+========================================= */
+
+.modal-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(15, 23, 42, 0.5);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    z-index: 1000;
+}
+
+.modal-card {
+    width: 100%;
+    max-width: 440px;
+
+    background: white;
+
+    border-radius: 16px;
+
+    padding: 28px 30px 30px;
+
+    box-shadow: 0 25px 70px rgba(15, 23, 42, 0.25);
+
+    animation: modal-in 0.18s ease;
+}
+
+@keyframes modal-in {
+    from {
+        opacity: 0;
+        transform: translateY(8px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modal-header {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 22px;
+}
+
+.modal-header h2 {
+    font-size: 20px;
+
+    letter-spacing: -0.4px;
+}
+
+.modal-close {
+    width: 30px;
+    height: 30px;
+
+    border: none;
+
+    background: #f3f4f6;
+
+    color: #6b7280;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-close:hover {
+    background: #e5e7eb;
+
+    color: #1f2937;
+}
+
+.modal-actions {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 24px;
+}
+
+.modal-actions .secondary-button,
+.modal-actions .primary-button {
+    flex: 1;
+
+    margin-top: 0;
+}
+
+
+/* =========================================
    AUTH SWITCH
 ========================================= */
 
@@ -763,6 +896,193 @@ button {
     border-color: #dc2626;
 
     color: #dc2626;
+}
+
+.avatar-dropdown {
+    position: absolute;
+    right: 0;
+    margin-top: 8px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    min-width: 180px;
+    padding: 8px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.2s ease;
+    z-index: 100;
+}
+
+.user-avatar:hover .avatar-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-item {
+    width: 100%;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #1f2937;
+    border: none;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+}
+
+.dropdown-item:hover {
+    background: #f3f4f6;
+    color: #111827;
+}
+
+.dropdown-item:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+.dropdown-item-danger {
+    color: var(--danger);
+
+    border-top: 1px solid #f0f1f3;
+
+    margin-top: 4px;
+
+    padding-top: 12px;
+}
+
+.dropdown-item-danger:hover {
+    background: var(--danger-bg);
+
+    color: var(--danger);
+}
+
+/* =========================================
+   SIDEBAR NAVIGATION
+   ========================================= */
+
+.sidebar-nav {
+    width: 250px;
+
+    background: white;
+
+    border-right: 1px solid #e5e7eb;
+
+    height: calc(100vh - 76px);
+
+    position: fixed;
+
+    left: 0;
+
+    top: 76px;
+
+    padding-bottom: 20px;
+}
+
+
+.sidebar-nav nav {
+    padding: 20px 20px;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+
+    padding: 0;
+
+    margin: 0;
+}
+
+.sidebar-nav ul li {
+    margin-bottom: 1px;
+}
+
+.sidebar-nav ul li a {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 5px;
+
+    padding: 12px 16px;
+
+    color: #6b7280;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    text-decoration: none;
+
+    border-radius: 6px;
+
+    transition: background 0.2s;
+}
+
+.sidebar-nav ul li a:hover {
+    background: #f9fafb;
+
+    color: #1f2937;
+}
+
+.sidebar-nav ul li a.active {
+    background: #e5e7eb;
+
+    color: #374151;
+}
+
+/* =========================================
+   DASHBOARD HEADER — SIDEBAR LAYOUT OVERRIDE
+   (applies only to dashboards that render a
+   .sidebar-nav, e.g. the IQAC Coordinator view)
+   ========================================= */
+
+.has-sidebar .dashboard-header {
+    position: fixed;
+
+    left: 0;
+    right: 0;
+    top: 0;
+
+    z-index: 100;
+}
+
+.has-sidebar .dashboard-content {
+    margin-left: 250px;
+
+    padding-top: calc(76px + 50px);
+}
+
+@media (max-width: 1024px) {
+
+    .sidebar-nav {
+        display: none;
+    }
+
+    .has-sidebar .dashboard-header {
+        left: 0;
+    }
+
+    .has-sidebar .dashboard-content {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 640px) {
+
+    .dashboard-header {
+        padding: 0 16px;
+    }
+
+    .user-area {
+        gap: 8px;
+    }
 }
 
 
