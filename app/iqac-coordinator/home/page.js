@@ -5,7 +5,7 @@ export default function IqacHomePage() {
     <>
       <div className="dashboard-title">
         <div>
-          <span className="dashboard-label">ADMINISTRATOR</span>
+          <span className="dashboard-label"></span>
           <h1>IQAC Coordinator Dashboard</h1>
           <p>Welcome to the SVIET Internal Quality Assurance Cell.</p>
         </div>

@@ -148,7 +148,7 @@ export default function UserManagementPage() {
     <>
       <div className="dashboard-title">
         <div>
-          <span className="dashboard-label">ADMINISTRATOR</span>
+          <span className="dashboard-label"></span>
           <h1>User Management</h1>
           <p>Manage IQAC portal user accounts and approvals.</p>
         </div>

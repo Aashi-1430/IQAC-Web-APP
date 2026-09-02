@@ -5,7 +5,7 @@ export default function AuditsPage() {
     <>
       <div className="dashboard-title">
         <div>
-          <span className="dashboard-label">ADMINISTRATOR</span>
+          <span className="dashboard-label"></span>
           <h1>Audits</h1>
           <p>Track and manage IQAC audits.</p>
         </div>

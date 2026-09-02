@@ -5,7 +5,7 @@ export default function NotificationsPage() {
     <>
       <div className="dashboard-title">
         <div>
-          <span className="dashboard-label">ADMINISTRATOR</span>
+          <span className="dashboard-label"></span>
           <h1>Notifications</h1>
           <p>View IQAC portal notifications.</p>
         </div>

@@ -5,7 +5,7 @@ export default function DepartmentsPage() {
     <>
       <div className="dashboard-title">
         <div>
-          <span className="dashboard-label">ADMINISTRATOR</span>
+          <span className="dashboard-label"></span>
           <h1>Departments</h1>
           <p>Manage departmental IQAC records.</p>
         </div>

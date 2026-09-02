@@ -5,7 +5,7 @@ export default function FormsPage() {
     <>
       <div className="dashboard-title">
         <div>
-          <span className="dashboard-label">ADMINISTRATOR</span>
+          <span className="dashboard-label"></span>
           <h1>Forms</h1>
           <p>Manage IQAC forms and templates.</p>
         </div>
