@@ -17,6 +17,9 @@ const LOGIN_API =
 const SIGNUP_API =
     `${API_BASE_URL}/auth/signup`;
 
+const USER_ME_API =
+    `${API_BASE_URL}/users/me`;
+
 
 /*
  * IMPORTANT
@@ -374,8 +377,8 @@ if (loginForm) {
                    EXTRACT USER
                 ----------------------------------------- */
 
-                const user =
-                    extractUser(data);
+let user =
+    extractUser(data);
 
 
                 console.log(
@@ -490,19 +493,26 @@ if (loginForm) {
                 }
 
 
-                /* -----------------------------------------
+/* -----------------------------------------
                    NORMALIZE ROLE
-                ----------------------------------------- */
+               ----------------------------------------- */
 
                 role =
                     normalizeRole(role);
 
+                // Fetch fresh user profile after login
+                const profile = await fetchUserProfile();
+                if (profile) {
+                    user = profile;
+                    role = normalizeRole(profile.role || role);
+                }
 
-                /* -----------------------------------------
+
+/* -----------------------------------------
                    ROUTE USER
-                ----------------------------------------- */
+               ----------------------------------------- */
 
-                routeUserByRole(
+                await routeUserByRole(
                     role,
                     user
                 );
@@ -1338,6 +1348,56 @@ function extractUser(
 
 
 /* =========================================================
+   FETCH USER FROM /users/me
+   ========================================================= */
+
+async function fetchUserProfile() {
+
+    const token =
+        localStorage.getItem(
+            "iqac_token"
+        );
+
+    if (!token) {
+        return null;
+    }
+
+    try {
+
+        const response =
+            await fetch(
+                USER_ME_API,
+                {
+                    method: "GET",
+                    credentials: "include",
+                    headers: {
+                        "accept": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    }
+                }
+            );
+
+        const data =
+            await parseResponse(response);
+
+        if (!response.ok) {
+            console.error("Failed to fetch user profile:", data);
+            return null;
+        }
+
+        return data.data || data;
+
+    } catch (error) {
+
+        console.error("Error fetching user profile:", error);
+        return null;
+
+    }
+
+}
+
+
+/* =========================================================
    NORMALIZE ROLE
    ========================================================= */
 
@@ -1478,7 +1538,7 @@ function getRoleFromToken(
    ROLE BASED ROUTING
    ========================================================= */
 
-function routeUserByRole(
+async function routeUserByRole(
     role,
     user = null
 ) {
@@ -1498,14 +1558,14 @@ function routeUserByRole(
 
     /* ---------------------------------------------
        IQAC COORDINATOR = ADMIN
-    --------------------------------------------- */
+   --------------------------------------------- */
 
     if (
         role ===
         "iqac_coordinator"
     ) {
 
-        showIQACDashboard(
+        await showIQACDashboard(
             user
         );
 
@@ -1516,13 +1576,13 @@ function routeUserByRole(
 
     /* ---------------------------------------------
        HOD = USER
-    --------------------------------------------- */
+   --------------------------------------------- */
 
     if (
         role === "hod"
     ) {
 
-        showHODDashboard(
+        await showHODDashboard(
             user
         );
 
@@ -1533,7 +1593,7 @@ function routeUserByRole(
 
     /* ---------------------------------------------
        UNKNOWN ROLE
-    --------------------------------------------- */
+   --------------------------------------------- */
 
     console.error(
         "Unknown user role:",
@@ -1562,7 +1622,7 @@ function routeUserByRole(
    SHOW IQAC COORDINATOR DASHBOARD
    ========================================================= */
 
-function showIQACDashboard(
+async function showIQACDashboard(
     user
 ) {
 
@@ -1604,22 +1664,33 @@ function showIQACDashboard(
 
     }
 
+    let name = user?.name || "IQAC Coordinator";
+    let role = user?.role || "IQAC Coordinator";
 
-    const name =
-        user?.name ||
-        "IQAC Coordinator";
-
+    const profile = await fetchUserProfile();
+    if (profile) {
+        name = profile.name || name;
+        role = profile.role || role;
+    }
 
     const nameElement =
         document.getElementById(
             "iqacUserName"
         );
 
+    const roleElement = nameElement?.nextElementSibling;
 
     if (nameElement) {
 
         nameElement.textContent =
             name;
+
+    }
+
+    if (roleElement) {
+
+        roleElement.textContent =
+            role;
 
     }
 
@@ -1654,7 +1725,7 @@ function showIQACDashboard(
    SHOW HOD DASHBOARD
    ========================================================= */
 
-function showHODDashboard(
+async function showHODDashboard(
     user
 ) {
 
@@ -1696,22 +1767,34 @@ function showHODDashboard(
 
     }
 
+    let name = user?.name || "HOD";
+    let role = user?.role || "Head of Department";
 
-    const name =
-        user?.name ||
-        "HOD";
-
+    const profile = await fetchUserProfile();
+    if (profile) {
+        name = profile.name || name;
+        role = profile.role || role;
+    }
 
     const nameElement =
         document.getElementById(
             "hodUserName"
         );
 
+    const roleElement = nameElement?.nextElementSibling;
+
 
     if (nameElement) {
 
         nameElement.textContent =
             name;
+
+    }
+
+    if (roleElement) {
+
+        roleElement.textContent =
+            role;
 
     }
 
@@ -1898,7 +1981,7 @@ function logout() {
    CHECK EXISTING SESSION
    ========================================================= */
 
-function checkExistingSession() {
+async function checkExistingSession() {
 
     console.log(
         "Checking existing authentication session..."
@@ -1995,12 +2078,17 @@ function checkExistingSession() {
             }
         );
 
+        // Fetch fresh user profile
+        const profile = await fetchUserProfile();
+        if (profile) {
+            user = profile;
+            role = profile.role || role;
+        }
 
-        routeUserByRole(
+        await routeUserByRole(
             role,
             user
         );
-
 
         return;
 
