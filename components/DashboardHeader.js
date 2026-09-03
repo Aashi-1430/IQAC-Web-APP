@@ -65,12 +65,11 @@ export default function DashboardHeader({ roleLabel, withDropdown = false }) {
                   Logout
                 </button>
               </div>
-            </div>
+</div>
           ) : (
             <div className="user-avatar">{initial}</div>
           )}
-
-        </div>
+</div>
       </header>
 
       <ProfileModal open={showProfile} onClose={() => setShowProfile(false)} user={user} />

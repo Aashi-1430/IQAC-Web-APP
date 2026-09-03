@@ -70,6 +70,15 @@ const NAV_ITEMS = [
       </svg>
     ),
   },
+  {
+    href: "/iqac-coordinator/task-management",
+    label: "Task Management",
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M3 3v18h18V3zm4.11 2.9a1.6 1.6 0 0 1 2.23 0L17 7.68V13H13l3.06-3.98a1.6 1.6 0 1 1 2.57 2.53L20.5 15H13v5.06a1.6 1.6 0 1 1-3.2 0V15a1.6 1.6 0 0 1-3.2 0v-.93a1.6 1.6 0 0 1 1.06-1.45l3.18-4.05a1.6 1.6 0 0 1 0-2.57z" />
+      </svg>
+    ),
+  },
 ];
 
 export default function Sidebar() {
