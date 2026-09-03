@@ -62,7 +62,9 @@ export default function UserManagementPage() {
         getPendingUsers(token),
       ]);
       setAllUsers(users);
-      setPendingUsers(pending);
+      // Filter out deactivated users from pending - only show truly pending users
+      // Pending users should have is_active = false AND should not have been previously activated
+      setPendingUsers(pending.filter(u => !u.is_active));
     } catch (err) {
       console.error("Failed to load users:", err);
       setError(err.message || "Unable to load users.");
