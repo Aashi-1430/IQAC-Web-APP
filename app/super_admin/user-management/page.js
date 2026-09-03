@@ -88,18 +88,13 @@ export default function UserManagementPage() {
     [currentUser]
   );
 
-  // Check if the current user can modify another user
-  // IQAC coordinator cannot modify another IQAC coordinator
+  // Super admin can modify everyone except themselves
   const canModify = useCallback(
     (u) => {
       if (isSelf(u)) return false;
-      if (u.role === "super_admin") return false;
-      if (currentUser?.role === "iqac_coordinator" && u.role === "iqac_coordinator") {
-        return false;
-      }
       return true;
     },
-    [currentUser, isSelf]
+    [isSelf]
   );
 
   async function runAction(user, action, fn) {
@@ -217,7 +212,6 @@ export default function UserManagementPage() {
                 {rows.map((u) => {
                   const acting = actingId === u.id;
                   const self = isSelf(u);
-                  const isSuperAdmin = u.role === "super_admin";
                   const canModifyUser = canModify(u);
 
                   return (
@@ -232,7 +226,7 @@ export default function UserManagementPage() {
                       </td>
                       <td className="muted-cell">{u.email}</td>
                       <td>
-                        {!canModifyUser || isSuperAdmin || self ? (
+                        {!canModifyUser || self ? (
                           <span className="role-pill">{formatRole(u.role)}</span>
                         ) : (
                           <select
@@ -276,7 +270,7 @@ export default function UserManagementPage() {
                                 Reject
                               </button>
                             </>
-                          ) : !canModifyUser || self || isSuperAdmin ? (
+                          ) : !canModifyUser || self ? (
                             <span className="muted-cell">—</span>
                           ) : u.is_active ? (
                             <button

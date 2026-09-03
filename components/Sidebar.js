@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useAuth } from "../lib/AuthContext";
 
 const NAV_ITEMS = [
   {
-    href: "/iqac-coordinator/home",
+    href: "home",
     label: "Dashboard",
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -17,7 +18,7 @@ const NAV_ITEMS = [
     ),
   },
   {
-    href: "/iqac-coordinator/user-management",
+    href: "user-management",
     label: "User Management",
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -29,7 +30,7 @@ const NAV_ITEMS = [
     ),
   },
   {
-    href: "/iqac-coordinator/departments",
+    href: "departments",
     label: "Departments",
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -40,7 +41,7 @@ const NAV_ITEMS = [
     ),
   },
   {
-    href: "/iqac-coordinator/forms",
+    href: "forms",
     label: "Forms",
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -50,7 +51,7 @@ const NAV_ITEMS = [
     ),
   },
   {
-    href: "/iqac-coordinator/audits",
+    href: "audits",
     label: "Audits",
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -61,7 +62,7 @@ const NAV_ITEMS = [
     ),
   },
   {
-    href: "/iqac-coordinator/notifications",
+    href: "notifications",
     label: "Notifications",
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -71,7 +72,7 @@ const NAV_ITEMS = [
     ),
   },
   {
-    href: "/iqac-coordinator/task-management",
+    href: "task-management",
     label: "Task Management",
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -83,19 +84,26 @@ const NAV_ITEMS = [
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const { role } = useAuth();
+
+  // Determine base path from role
+  const basePath = role === "super_admin" ? "/super_admin" : "/iqac-coordinator";
 
   return (
     <div className="sidebar-nav">
       <nav>
         <ul>
-          {NAV_ITEMS.map((item) => (
-            <li key={item.href}>
-              <Link href={item.href} className={pathname === item.href ? "active" : ""}>
-                {item.icon}
-                {item.label}
-              </Link>
-            </li>
-          ))}
+          {NAV_ITEMS.map((item) => {
+            const fullHref = `${basePath}/${item.href}`;
+            return (
+              <li key={item.href}>
+                <Link href={fullHref} className={pathname === fullHref ? "active" : ""}>
+                  {item.icon}
+                  {item.label}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </nav>
     </div>
