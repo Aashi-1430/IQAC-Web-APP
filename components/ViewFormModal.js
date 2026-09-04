@@ -34,11 +34,10 @@ export default function ViewFormModal({ open, onClose, form }) {
 
             {form.sub_forms && form.sub_forms.length > 0 ? (
               <div className="sub-forms-view">
-                <h3 style={{ fontSize: "16px", fontWeight: "600", marginBottom: "15px" }}>Sub-Forms</h3>
                 {form.sub_forms.map((subForm, subFormIndex) => (
                   <div key={subFormIndex} className="sub-form-view-item">
                     <h4 style={{ fontSize: "15px", fontWeight: "600", color: "var(--primary)", marginBottom: "12px" }}>
-                      {subFormIndex + 1}. {subForm.title}
+                      {subForm.title}
                     </h4>
 
                     {subForm.fields && subForm.fields.length > 0 ? (
