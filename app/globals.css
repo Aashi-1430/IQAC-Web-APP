@@ -1200,22 +1200,11 @@ button {
 }
 
 .small-logo {
-    width: 42px;
-    height: 42px;
-
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
     border-radius: 10px;
 
-    background: var(--primary);
-
-    color: white;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    font-size: 19px;
-    font-weight: 800;
 }
 
 .dashboard-brand h2 {

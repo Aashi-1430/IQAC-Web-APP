@@ -21,10 +21,10 @@ export default function DashboardHeader({ roleLabel, withDropdown = false }) {
     <>
       <header className="dashboard-header">
         <div className="dashboard-brand">
-          <div className="small-logo">S</div>
+          <img src="/assets/logo.png" alt="SVIET Logo" className="small-logo" />
           <div>
-            <h2>SVIET IQAC</h2>
-            <span>Internal Quality Assurance Cell</span>
+            <h2>IQAC CONNECT</h2>
+            <span>SVIET | Internal Quality Assurance Cell</span>
           </div>
         </div>
 
