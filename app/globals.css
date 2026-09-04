@@ -978,6 +978,174 @@ button {
     margin-top: 0;
 }
 
+/* =========================================
+   MODAL LARGE & FORM MODAL STYLES
+========================================= */
+
+.modal-large {
+    max-width: 900px;
+    width: 95%;
+}
+
+.modal-content {
+    width: 100%;
+    max-width: 440px;
+    background: white;
+    border-radius: 16px;
+    padding: 28px 30px 30px;
+    box-shadow: 0 25px 70px rgba(15, 23, 42, 0.25);
+    animation: modal-in 0.18s ease;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-content.modal-large {
+    max-width: 1400px;
+    padding: 32px 36px 36px;
+}
+
+.modal-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+.modal-body {
+    margin-bottom: 20px;
+}
+
+.modal-footer {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+}
+
+.form-fields-section {
+    margin-top: 20px;
+}
+
+.sub-forms-section {
+    margin-top: 20px;
+}
+
+.sub-form-item {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #e1e8ed;
+}
+
+.fields-subsection {
+    margin-top: 15px;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+.btn-secondary-small {
+    padding: 6px 12px;
+    font-size: 12px;
+    border: 1px solid var(--primary);
+    background: white;
+    color: var(--primary);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-secondary-small:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-secondary-small:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.field-item {
+    background: var(--background);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border: 1px solid var(--border);
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 13px;
+    outline: none;
+    transition: 0.2s;
+}
+
+.form-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(22, 61, 112, 0.09);
+}
+
+.form-input:disabled {
+    background: #f3f4f6;
+    cursor: not-allowed;
+}
+
+textarea.form-input {
+    resize: vertical;
+    font-family: inherit;
+}
+
+select.form-input {
+    cursor: pointer;
+}
+
+.btn-danger-small {
+    padding: 6px 12px;
+    font-size: 12px;
+    border: none;
+    background: var(--danger);
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-danger-small:hover {
+    background: #b91c1c;
+}
+
+.btn-danger-small:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.error-message {
+    padding: 12px 15px;
+    background: var(--danger-bg);
+    color: var(--danger);
+    border-radius: 8px;
+    font-size: 13px;
+    margin-bottom: 15px;
+    border: 1px solid var(--danger);
+}
+
 
 /* =========================================
    CALENDAR BUTTON & MODAL
@@ -1574,6 +1742,264 @@ button {
     font-size: 12px;
 
     color: #8a94a6;
+}
+
+
+/* =========================================
+   FORMS GRID & CARDS
+========================================= */
+
+.forms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.form-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: 0.2s;
+}
+
+.form-card:hover {
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+    border-color: var(--primary);
+}
+
+.form-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+
+.form-card-header h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin: 0;
+    flex: 1;
+}
+
+.form-card-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.icon-btn {
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.icon-btn-edit {
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
+.icon-btn-edit:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.icon-btn-view {
+    background: #f0fdf4;
+    color: var(--success);
+}
+
+.icon-btn-view:hover {
+    background: var(--success);
+    color: white;
+}
+
+.icon-btn-delete {
+    background: var(--danger-bg);
+    color: var(--danger);
+}
+
+.icon-btn-delete:hover {
+    background: var(--danger);
+    color: white;
+}
+
+.form-card-description {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.form-card-footer {
+    padding-top: 15px;
+    border-top: 1px solid var(--border);
+}
+
+.form-fields-count {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 500;
+}
+
+
+/* =========================================
+   VIEW FORM MODAL
+========================================= */
+
+.form-view-container {
+    padding: 10px 0;
+}
+
+.form-description-view {
+    background: var(--primary-light);
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.form-description-view p {
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.form-info {
+    background: var(--primary-light);
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.info-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.info-row:last-child {
+    margin-bottom: 0;
+}
+
+.info-row strong {
+    min-width: 140px;
+    color: var(--primary);
+}
+
+.info-row span {
+    color: var(--text);
+}
+
+.sub-forms-view {
+    margin-top: 20px;
+}
+
+.sub-form-view-item {
+    background: #fafbfc;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+}
+
+.fields-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.field-name-tag {
+    display: inline-block;
+    padding: 8px 16px;
+    background: var(--primary-light);
+    color: var(--primary);
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid var(--primary);
+}
+
+.table-container {
+    overflow-x: auto;
+    margin-top: 10px;
+}
+
+.form-view-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 13px;
+}
+
+.form-view-table thead {
+    background: var(--primary);
+    color: white;
+}
+
+.form-view-table th {
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-view-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+}
+
+.form-view-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.form-view-table tbody tr:hover {
+    background: var(--background);
+}
+
+.field-type-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    background: var(--primary-light);
+    color: var(--primary);
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.badge-required {
+    display: inline-block;
+    padding: 4px 10px;
+    background: var(--success-bg);
+    color: var(--success);
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.badge-optional {
+    display: inline-block;
+    padding: 4px 10px;
+    background: #f3f4f6;
+    color: var(--muted);
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
 }
 
 
